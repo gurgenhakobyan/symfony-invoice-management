@@ -1,0 +1,6 @@
+<tr>
+    <th scope="row">{{ uploadError.fileName }}</th>
+    <td>{{ uploadError.rowNumber }}</td>
+    <td>{{ uploadError.rowText|highlightError(uploadError.highlightStart, uploadError.highlightEnd)|raw }}</td>
+    <td>{{ uploadError.message }}</td>
+</tr>

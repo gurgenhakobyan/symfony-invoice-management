@@ -4,6 +4,12 @@
 # Put parameters here that don't need to change on each machine where the app is deployed
 # https://symfony.com/doc/current/best_practices/configuration.html#application-related-configuration
 parameters:
+    invoices_directory: '%kernel.project_dir%/public/uploads/invoices'
+    invoice_list.pageLimit: 100
+    invoice_errors_list.pageLimit: 100
+    invoice_coefficients:
+        moreThan30: 0.5
+        lessOrEq30: 0.3
 
 services:
     # default configuration for services in *this* file
@@ -22,6 +28,14 @@ services:
     App\Controller\:
         resource: '../src/Controller'
         tags: ['controller.service_arguments']
+
+    App\Service\FileManager:
+        arguments:
+            $targetDirectory: '%invoices_directory%'
+
+    App\Service\CSVManager:
+        arguments:
+            $invoiceCoefficients: '%invoice_coefficients%'
 
     # add more service definitions when explicit configuration is needed
     # please note that last definitions always *replace* previous ones
